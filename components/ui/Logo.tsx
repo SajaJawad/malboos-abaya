@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface LogoProps {
   variant?: 'dark' | 'light' | 'gold';
@@ -12,32 +13,29 @@ export const Logo: React.FC<LogoProps> = ({
   className = '',
   size = 'md',
 }) => {
-  const textColors = {
-    dark: 'text-[#151311]',
-    light: 'text-[#F7F2EA]',
-    gold: 'text-[#C4A36B]',
+  const imageSizes = {
+    sm: { width: 140, height: 50, className: 'h-10 sm:h-12 w-auto' },
+    md: { width: 220, height: 80, className: 'h-14 sm:h-18 md:h-20 w-auto' },
+    lg: { width: 280, height: 100, className: 'h-20 sm:h-24 lg:h-28 w-auto' },
   };
 
-  const sizes = {
-    sm: 'text-lg tracking-[0.2em]',
-    md: 'text-2xl tracking-[0.25em]',
-    lg: 'text-3xl lg:text-4xl tracking-[0.3em]',
-  };
+  const selected = imageSizes[size];
 
   return (
     <Link
       href="/"
       className={`inline-flex flex-col items-center justify-center group ${className}`}
     >
-      <span className={`font-kufi font-bold text-2xl lg:text-3xl ${textColors[variant]}`}>
-        ملبوس
-      </span>
-      <span
-        className={`font-cormorant uppercase font-light -mt-1 ${sizes[size]} ${textColors[variant]}`}
-      >
-        MALBOOS
-      </span>
-      <div className="w-4 h-[1px] bg-[#C4A36B] mt-0.5 group-hover:w-8 transition-all duration-300" />
+      <div className={`relative ${selected.className} flex items-center justify-center`}>
+        <Image
+          src="/images/malboos/malboos-logo.png"
+          alt="ملبوس — MALBOOS"
+          width={selected.width}
+          height={selected.height}
+          priority
+          className="object-contain h-full w-auto transition-transform duration-300 group-hover:scale-105"
+        />
+      </div>
     </Link>
   );
 };
