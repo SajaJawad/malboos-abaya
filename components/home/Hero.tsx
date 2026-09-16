@@ -12,21 +12,21 @@ export const Hero: React.FC = () => {
     {
       title: 'أناقة تعكسك',
       subheading: 'عبايات ومخاوير بتصاميم عصرية تجمع بين الأصالة والحداثة',
-      image: '/images/malboos/hero/hero-1.jpg',
-      ctaText: 'تسوقي الآن',
-      ctaLink: '/shop',
+      image: '/images/malboos/hero/hero-abaya.jpg',
+      ctaText: 'تسوقي العبايات',
+      ctaLink: '/shop?category=abayas',
     },
     {
       title: 'فخامة التفاصيل',
       subheading: 'مخاوير فاخرة بتطريزات يدوية مستوحاة من التراث الخليجي الأصيل',
-      image: '/images/malboos/collections/new-collection.jpg',
+      image: '/images/malboos/hero/hero-makhawar.jpg',
       ctaText: 'اكتشفي المخاوير',
       ctaLink: '/shop?category=makhawer',
     },
     {
       title: 'تشكيلة العيد 2026',
       subheading: 'قصات متميزة وأقمشة ملكية مختارة بعناية لتكتمل إطلالتك',
-      image: '/images/malboos/collections/category-abaya.jpg',
+      image: '/images/malboos/hero/mekhware-hero2.jpg',
       ctaText: 'استكشفي المجموعة',
       ctaLink: '/shop?filter=new',
     },
@@ -45,26 +45,27 @@ export const Hero: React.FC = () => {
   return (
     <section className="relative w-full overflow-hidden bg-[#F7F2EA] py-4 lg:py-8">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[580px] lg:min-h-[680px] rounded-[4px] overflow-hidden border border-[#E8DDD0]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[580px] lg:min-h-[680px] rounded-[4px] overflow-hidden border border-[#E8DDD0] bg-[#F7F2EA]">
           {/* Left Visual Side (52% on desktop -> col-span-7) */}
-          <div className="lg:col-span-7 relative min-h-[380px] lg:min-h-full bg-[#E8DDD0]/40 order-1 lg:order-1 overflow-hidden group">
-            <Image
-              src={activeSlide.image}
-              alt={activeSlide.title}
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 55vw"
-              className="object-cover object-center transition-all duration-1000 transform group-hover:scale-102"
-            />
+          <div className="lg:col-span-7 relative min-h-[450px] lg:min-h-full bg-[#F7F2EA] order-1 lg:order-1 overflow-hidden group flex items-center justify-center p-4 lg:p-6">
+            {/* Elegant Subtle Panel Frame */}
+            <div className="relative w-full h-full min-h-[400px] lg:min-h-[600px] bg-[#E8DDD0]/20 rounded-[3px] border border-[#E8DDD0]/60 flex items-center justify-center overflow-hidden">
+              {/* 100% Full Uncropped Image */}
+              <Image
+                src={activeSlide.image}
+                alt={activeSlide.title}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                className="object-contain object-center p-2 md:p-4 z-10 transition-all duration-700 transform group-hover:scale-[1.01]"
+              />
 
-            {/* Subtle fabric gradient overlay from left */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent pointer-events-none" />
-
-            {/* Bottom Left Slider Indicator */}
-            <div className="absolute bottom-6 left-6 z-10 bg-[#151311]/70 backdrop-blur-md text-[#F7F2EA] px-4 py-2 text-xs font-cormorant tracking-widest flex items-center gap-2 rounded-[2px] border border-[#C4A36B]/30">
-              <span>0{currentSlide + 1}</span>
-              <span className="text-[#C4A36B]">|</span>
-              <span className="text-[#7B746E]">0{slides.length}</span>
+              {/* Bottom Left Warm Slider Indicator */}
+              <div className="absolute bottom-4 left-4 z-20 bg-white/90 backdrop-blur-md text-[#151311] px-3.5 py-1.5 text-xs font-cormorant tracking-widest flex items-center gap-2 rounded-[2px] border border-[#E8DDD0] shadow-xs">
+                <span className="font-semibold text-[#151311]">0{currentSlide + 1}</span>
+                <span className="text-[#C4A36B]">|</span>
+                <span className="text-[#7B746E]">0{slides.length}</span>
+              </div>
             </div>
           </div>
 
