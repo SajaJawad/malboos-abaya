@@ -1,7 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { X, Search, Heart, User, ShoppingBag } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
 import { useCart } from '@/context/CartContext';
@@ -13,12 +14,33 @@ interface MobileMenuProps {
   onClose: () => void;
 }
 
-export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
+function MobileMenuContent({ isOpen, onClose }: MobileMenuProps) {
   const { totalItems, openCart } = useCart();
   const { wishlistCount } = useWishlist();
   const { openSearch } = useSearch();
 
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const categoryParam = searchParams.get('category');
+  const filterParam = searchParams.get('filter');
+
+  const isHomeActive = pathname === '/';
+  const isAbayasActive = pathname === '/shop' && categoryParam === 'abayas';
+  const isMakhawerActive = pathname === '/shop' && categoryParam === 'makhawer';
+  const isNewActive = pathname === '/shop' && filterParam === 'new';
+  const isBestSellerActive = pathname === '/shop' && filterParam === 'bestseller';
+  const isAboutActive = pathname === '/about';
+  const isContactActive = pathname === '/contact';
+
   if (!isOpen) return null;
+
+  const getMobileLinkClass = (isActive: boolean) =>
+    `text-lg py-2.5 px-3 border-b border-[#E8DDD0]/50 transition-all rounded-[2px] flex items-center justify-between ${
+      isActive
+        ? 'text-[#C4A36B] font-semibold bg-[#C4A36B]/10 border-r-2 border-r-[#C4A36B]'
+        : 'text-[#151311] hover:text-[#C4A36B]'
+    }`;
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
@@ -94,55 +116,55 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
           </div>
 
           {/* Navigation Links */}
-          <nav className="flex flex-col gap-4 my-6">
+          <nav className="flex flex-col gap-2 my-6">
             <Link
               href="/"
               onClick={onClose}
-              className="text-lg text-[#151311] hover:text-[#C4A36B] py-2 border-b border-[#E8DDD0]/50 transition-colors"
+              className={getMobileLinkClass(isHomeActive)}
             >
-              الرئيسية
+              <span>الرئيسية</span>
             </Link>
             <Link
               href="/shop?category=abayas"
               onClick={onClose}
-              className="text-lg text-[#151311] hover:text-[#C4A36B] py-2 border-b border-[#E8DDD0]/50 transition-colors"
+              className={getMobileLinkClass(isAbayasActive)}
             >
-              العبايات
+              <span>العبايات</span>
             </Link>
             <Link
               href="/shop?category=makhawer"
               onClick={onClose}
-              className="text-lg text-[#151311] hover:text-[#C4A36B] py-2 border-b border-[#E8DDD0]/50 transition-colors"
+              className={getMobileLinkClass(isMakhawerActive)}
             >
-              المخاوير
+              <span>المخاوير</span>
             </Link>
             <Link
               href="/shop?filter=new"
               onClick={onClose}
-              className="text-lg text-[#151311] hover:text-[#C4A36B] py-2 border-b border-[#E8DDD0]/50 transition-colors"
+              className={getMobileLinkClass(isNewActive)}
             >
-              الجديد
+              <span>الجديد</span>
             </Link>
             <Link
               href="/shop?filter=bestseller"
               onClick={onClose}
-              className="text-lg text-[#151311] hover:text-[#C4A36B] py-2 border-b border-[#E8DDD0]/50 transition-colors"
+              className={getMobileLinkClass(isBestSellerActive)}
             >
-              الأكثر مبيعًا
+              <span>الأكثر مبيعًا</span>
             </Link>
             <Link
               href="/about"
               onClick={onClose}
-              className="text-lg text-[#151311] hover:text-[#C4A36B] py-2 border-b border-[#E8DDD0]/50 transition-colors"
+              className={getMobileLinkClass(isAboutActive)}
             >
-              من نحن
+              <span>من نحن</span>
             </Link>
             <Link
               href="/contact"
               onClick={onClose}
-              className="text-lg text-[#151311] hover:text-[#C4A36B] py-2 border-b border-[#E8DDD0]/50 transition-colors"
+              className={getMobileLinkClass(isContactActive)}
             >
-              تواصل معنا
+              <span>تواصل معنا</span>
             </Link>
           </nav>
         </div>
@@ -159,4 +181,13 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
       </div>
     </div>
   );
+}
+
+export const MobileMenu: React.FC<MobileMenuProps> = (props) => {
+  return (
+    <Suspense fallback={null}>
+      <MobileMenuContent {...props} />
+    </Suspense>
+  );
 };
+

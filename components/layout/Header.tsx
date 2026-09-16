@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { Search, Heart, User, ShoppingBag, Menu } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
 import { MobileMenu } from '@/components/layout/MobileMenu';
@@ -9,12 +10,25 @@ import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { useSearch } from '@/context/SearchContext';
 
-export const Header: React.FC = () => {
+function HeaderNav() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { totalItems, openCart } = useCart();
   const { wishlistCount } = useWishlist();
   const { openSearch } = useSearch();
+
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const categoryParam = searchParams.get('category');
+  const filterParam = searchParams.get('filter');
+
+  const isHomeActive = pathname === '/';
+  const isAbayasActive = pathname === '/shop' && categoryParam === 'abayas';
+  const isMakhawerActive = pathname === '/shop' && categoryParam === 'makhawer';
+  const isNewActive = pathname === '/shop' && filterParam === 'new';
+  const isAboutActive = pathname === '/about';
+  const isContactActive = pathname === '/contact';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +37,13 @@ export const Header: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const getLinkClass = (isActive: boolean) =>
+    `transition-all duration-300 relative py-1 ${
+      isActive
+        ? 'text-[#C4A36B] font-semibold after:content-[\'\'] after:absolute after:bottom-0 after:right-0 after:w-full after:h-[2px] after:bg-[#C4A36B]'
+        : 'text-[#151311] font-normal hover:text-[#C4A36B] after:content-[\'\'] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-[1.5px] after:bg-[#C4A36B] hover:after:w-full after:transition-all'
+    }`;
 
   return (
     <>
@@ -35,29 +56,17 @@ export const Header: React.FC = () => {
       >
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 grid grid-cols-12 items-center relative">
           {/* Right Navigation Links (RTL Right side -> 4 cols) */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-normal text-[#151311] col-span-4">
-            <Link
-              href="/"
-              className="hover:text-[#C4A36B] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-[1.5px] after:bg-[#C4A36B] hover:after:w-full after:transition-all duration-300"
-            >
+          <nav className="hidden lg:flex items-center gap-7 text-sm col-span-4">
+            <Link href="/" className={getLinkClass(isHomeActive)}>
               الرئيسية
             </Link>
-            <Link
-              href="/shop?category=abayas"
-              className="hover:text-[#C4A36B] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-[1.5px] after:bg-[#C4A36B] hover:after:w-full after:transition-all duration-300"
-            >
+            <Link href="/shop?category=abayas" className={getLinkClass(isAbayasActive)}>
               العبايات
             </Link>
-            <Link
-              href="/shop?category=makhawer"
-              className="hover:text-[#C4A36B] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-[1.5px] after:bg-[#C4A36B] hover:after:w-full after:transition-all duration-300"
-            >
+            <Link href="/shop?category=makhawer" className={getLinkClass(isMakhawerActive)}>
               المخاوير
             </Link>
-            <Link
-              href="/shop?filter=new"
-              className="hover:text-[#C4A36B] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-[1.5px] after:bg-[#C4A36B] hover:after:w-full after:transition-all duration-300"
-            >
+            <Link href="/shop?filter=new" className={getLinkClass(isNewActive)}>
               الجديد
             </Link>
           </nav>
@@ -80,17 +89,11 @@ export const Header: React.FC = () => {
 
           {/* Left Navigation Links & Far Left Icons (RTL Left side -> 4 cols) */}
           <div className="col-span-3 lg:col-span-4 flex items-center justify-end gap-6">
-            <nav className="hidden xl:flex items-center gap-6 text-sm font-normal text-[#151311]">
-              <Link
-                href="/about"
-                className="hover:text-[#C4A36B] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-[1.5px] after:bg-[#C4A36B] hover:after:w-full after:transition-all duration-300"
-              >
+            <nav className="hidden xl:flex items-center gap-6 text-sm">
+              <Link href="/about" className={getLinkClass(isAboutActive)}>
                 من نحن
               </Link>
-              <Link
-                href="/contact"
-                className="hover:text-[#C4A36B] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-[1.5px] after:bg-[#C4A36B] hover:after:w-full after:transition-all duration-300"
-              >
+              <Link href="/contact" className={getLinkClass(isContactActive)}>
                 تواصل معنا
               </Link>
             </nav>
@@ -171,4 +174,13 @@ export const Header: React.FC = () => {
       />
     </>
   );
+}
+
+export const Header: React.FC = () => {
+  return (
+    <Suspense fallback={<div className="h-20 bg-[#F7F2EA] w-full" />}>
+      <HeaderNav />
+    </Suspense>
+  );
 };
+

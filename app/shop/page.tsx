@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useMemo, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { useState, useEffect, useMemo, Suspense } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { SlidersHorizontal, ChevronDown, X, RefreshCw } from 'lucide-react';
 import { PRODUCTS, Product } from '@/data/products';
@@ -10,16 +10,36 @@ import { Container } from '@/components/ui/Container';
 
 function ShopContent() {
   const searchParams = useSearchParams();
-  const initialCategory = searchParams.get('category') || 'all';
-  const initialFilter = searchParams.get('filter') || 'all';
-  const initialOccasion = searchParams.get('occasion') || 'all';
+  const router = useRouter();
 
-  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
+  const categoryParam = searchParams.get('category') || 'all';
+  const filterParam = searchParams.get('filter') || 'all';
+  const occasionParam = searchParams.get('occasion') || 'all';
+
+  const [selectedCategory, setSelectedCategory] = useState<string>(categoryParam);
   const [selectedSize, setSelectedSize] = useState<string>('all');
-  const [selectedOccasion, setSelectedOccasion] = useState<string>(initialOccasion);
+  const [selectedOccasion, setSelectedOccasion] = useState<string>(occasionParam);
   const [sortOption, setSortOption] = useState<string>('newest');
   const [priceRange, setPriceRange] = useState<number>(600);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
+
+  // Synchronize category & occasion when URL searchParams change
+  useEffect(() => {
+    setSelectedCategory(searchParams.get('category') || 'all');
+    setSelectedOccasion(searchParams.get('occasion') || 'all');
+  }, [searchParams]);
+
+  const abayasCount = useMemo(() => PRODUCTS.filter((p) => p.category === 'abayas').length, []);
+  const makhawerCount = useMemo(() => PRODUCTS.filter((p) => p.category === 'makhawer').length, []);
+
+  const handleCategorySelect = (cat: string) => {
+    setSelectedCategory(cat);
+    if (cat === 'all') {
+      router.push('/shop', { scroll: false });
+    } else {
+      router.push(`/shop?category=${cat}`, { scroll: false });
+    }
+  };
 
   // Filter products logic
   const filteredProducts = useMemo(() => {
@@ -29,9 +49,9 @@ function ShopContent() {
       result = result.filter((p) => p.category === selectedCategory);
     }
 
-    if (initialFilter === 'bestseller') {
+    if (filterParam === 'bestseller') {
       result = result.filter((p) => p.bestSeller);
-    } else if (initialFilter === 'new') {
+    } else if (filterParam === 'new') {
       result = result.filter((p) => p.newArrival);
     }
 
@@ -58,7 +78,7 @@ function ShopContent() {
     }
 
     return result;
-  }, [selectedCategory, initialFilter, selectedSize, selectedOccasion, priceRange, sortOption]);
+  }, [selectedCategory, filterParam, selectedSize, selectedOccasion, priceRange, sortOption]);
 
   const resetFilters = () => {
     setSelectedCategory('all');
@@ -66,6 +86,7 @@ function ShopContent() {
     setSelectedOccasion('all');
     setPriceRange(600);
     setSortOption('newest');
+    router.push('/shop', { scroll: false });
   };
 
   return (
@@ -86,7 +107,11 @@ function ShopContent() {
             MALBOOS BOUTIQUE
           </span>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#151311]">
-            جميع المجموعات
+            {selectedCategory === 'abayas'
+              ? 'تشكيلة العبايات'
+              : selectedCategory === 'makhawer'
+              ? 'تشكيلة المخاوير'
+              : 'جميع المجموعات'}
           </h1>
           <p className="text-[#7B746E] text-sm md:text-base mt-2 font-light max-w-lg mx-auto">
             تصفحي أحدث ابتكاراتنا من العبايات والمخاوير المصممة بروح خليجية متفردة
@@ -98,7 +123,7 @@ function ShopContent() {
           {/* Category Quick Pills */}
           <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
             <button
-              onClick={() => setSelectedCategory('all')}
+              onClick={() => handleCategorySelect('all')}
               className={`px-4 py-2 text-xs md:text-sm font-medium transition-all rounded-[2px] whitespace-nowrap ${
                 selectedCategory === 'all'
                   ? 'bg-[#151311] text-[#F7F2EA]'
@@ -108,24 +133,24 @@ function ShopContent() {
               جميع المنتجات ({PRODUCTS.length})
             </button>
             <button
-              onClick={() => setSelectedCategory('abayas')}
+              onClick={() => handleCategorySelect('abayas')}
               className={`px-4 py-2 text-xs md:text-sm font-medium transition-all rounded-[2px] whitespace-nowrap ${
                 selectedCategory === 'abayas'
                   ? 'bg-[#151311] text-[#F7F2EA]'
                   : 'bg-white text-[#151311] border border-[#E8DDD0] hover:border-[#C4A36B]'
               }`}
             >
-              العبايات (8)
+              العبايات ({abayasCount})
             </button>
             <button
-              onClick={() => setSelectedCategory('makhawer')}
+              onClick={() => handleCategorySelect('makhawer')}
               className={`px-4 py-2 text-xs md:text-sm font-medium transition-all rounded-[2px] whitespace-nowrap ${
                 selectedCategory === 'makhawer'
                   ? 'bg-[#151311] text-[#F7F2EA]'
                   : 'bg-white text-[#151311] border border-[#E8DDD0] hover:border-[#C4A36B]'
               }`}
             >
-              المخاوير (8)
+              المخاوير ({makhawerCount})
             </button>
           </div>
 
