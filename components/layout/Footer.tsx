@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { Logo } from '@/components/ui/Logo';
-import { Instagram, MessageCircle, CreditCard, ShieldCheck } from 'lucide-react';
+import { MessageCircle, CreditCard, ShieldCheck } from 'lucide-react';
+import { InstagramIcon } from '@/components/ui/Icons';
 
 export const Footer: React.FC = () => {
   return (
