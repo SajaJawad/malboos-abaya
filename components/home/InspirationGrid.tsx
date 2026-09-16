@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Instagram } from 'lucide-react';
+import { InstagramIcon } from '@/components/ui/Icons';
 
 export const InspirationGrid: React.FC = () => {
   const posts = [
@@ -69,7 +69,7 @@ export const InspirationGrid: React.FC = () => {
               />
 
               <div className="absolute inset-0 bg-[#151311]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-center text-[#F7F2EA]">
-                <Instagram className="w-6 h-6 text-[#C4A36B] mb-2" />
+                <InstagramIcon className="w-6 h-6 text-[#C4A36B] mb-2" />
                 <span className="text-[11px] font-light line-clamp-2">
                   {post.caption}
                 </span>

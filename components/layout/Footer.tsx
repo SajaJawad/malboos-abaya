@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
                 className="w-10 h-10 rounded-full border border-[#C4A36B]/30 flex items-center justify-center text-[#C4A36B] hover:bg-[#C4A36B] hover:text-[#151311] transition-all"
                 aria-label="إنستغرام"
               >
-                <Instagram className="w-4 h-4" />
+                <InstagramIcon className="w-4 h-4" />
               </a>
               <a
                 href="https://tiktok.com"
