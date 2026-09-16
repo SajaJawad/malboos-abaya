@@ -34,7 +34,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#E8DDD0]/30 rounded-[3px] border border-[#E8DDD0]/50">
         <Link href={`/product/${product.slug}`} className="block w-full h-full">
           <Image
-            src={isHovered && secondaryImage ? secondaryImage : mainImage}
+            src={mainImage}
             alt={product.name}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
