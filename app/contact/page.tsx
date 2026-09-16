@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { Container } from '@/components/ui/Container';
-import { Mail, Phone, MessageCircle, Instagram, CheckCircle2 } from 'lucide-react';
+import { Mail, Phone, MessageCircle, CheckCircle2 } from 'lucide-react';
+import { InstagramIcon } from '@/components/ui/Icons';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -72,7 +73,7 @@ export default function ContactPage() {
                   className="flex items-center gap-4 hover:text-[#C4A36B] transition-colors"
                 >
                   <div className="w-10 h-10 rounded-full border border-[#C4A36B]/40 flex items-center justify-center text-[#C4A36B]">
-                    <Instagram className="w-5 h-5" />
+                    <InstagramIcon className="w-5 h-5" />
                   </div>
                   <div>
                     <span className="block text-xs text-[#7B746E]">حساب إنستغرام الرسمي</span>
