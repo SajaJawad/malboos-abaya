@@ -42,6 +42,14 @@ export const metadata: Metadata = {
   title: 'ملبوس | MALBOOS — عبايات ومخاوير بتصاميم عصرية',
   description: 'اكتشفي ملبوس، وجهتك الأولى للعبايات الفاخرة والمخاوير بتصاميم تجمع بين الأصالة الخليجية والأناقة المعاصرة.',
   keywords: ['ملبوس', 'عبايات', 'مخاوير', 'ازياء خليجية', 'عباية كلوش', 'مخوار مطرز'],
+  icons: {
+    icon: [
+      { url: '/images/malboos/malboos-logo.png' },
+      { url: '/favicon.png', type: 'image/png' },
+    ],
+    shortcut: '/images/malboos/malboos-logo.png',
+    apple: '/images/malboos/malboos-logo.png',
+  },
   openGraph: {
     title: 'ملبوس | MALBOOS — MORE THAN A PIECE',
     description: 'عبايات ومخاوير بتصاميم عصرية تجمع بين الأصالة والحداثة',
@@ -62,6 +70,11 @@ export default function RootLayout({
       className={`${notoKufi.variable} ${notoSans.variable} ${cormorant.variable} ${inter.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="icon" href="/images/malboos/malboos-logo.png" type="image/png" sizes="any" />
+        <link rel="shortcut icon" href="/images/malboos/malboos-logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/malboos/malboos-logo.png" />
+      </head>
       <body
         className="min-h-full flex flex-col bg-[#F7F2EA] text-[#151311] selection:bg-[#C4A36B] selection:text-[#151311]"
         suppressHydrationWarning
