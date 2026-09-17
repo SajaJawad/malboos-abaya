@@ -6,33 +6,33 @@ export const InspirationGrid: React.FC = () => {
   const posts = [
     {
       id: 1,
-      image: '/images/malboos/hero/hero-1.jpg',
-      caption: 'إطلالة عباية ملكية فاخرة بلمسة ذهبية دافئة',
+      image: '/images/malboos/inspiration/inspiration-1.jpg',
+      caption: 'إطلالة أنيقة بفستان سماوي وكيمونو وردي مشجر',
     },
     {
       id: 2,
-      image: '/images/malboos/collections/makhawar-detail.jpg',
-      caption: 'دقة التطريز اليدوي على المخاوير الإماراتية الأصيلة',
+      image: '/images/malboos/inspiration/inspiration-2.jpg',
+      caption: 'عباية زيتية بدانتيل طبقات متقن وحقيبة فاخرة',
     },
     {
       id: 3,
-      image: '/images/malboos/abayas/abaya-1.jpg',
-      caption: 'حرير كوري ناعم بانسيابية لا مثيل لها',
+      image: '/images/malboos/inspiration/inspiration-3.jpg',
+      caption: 'قفطان أصفر زبادي مطرز بالقصب واللؤلؤ',
     },
     {
       id: 4,
-      image: '/images/malboos/collections/new-collection.jpg',
-      caption: 'تفاصيل تعكس حضورك في كل مناسبة',
+      image: '/images/malboos/abayas/story-main-abaya.jpg',
+      caption: 'عباية بني موكا بكسرات ملكية وحضور متفرد',
     },
     {
       id: 5,
-      image: '/images/malboos/makhawer/makhawar-1.jpg',
-      caption: 'تغليف ملبوس الفاخر المستعد للإهداء مباشرة',
+      image: '/images/malboos/inspiration/inspiration-5.jpg',
+      caption: 'قفطان عنابي مخملي مطرز بالقصب والترتر الذهبي',
     },
     {
       id: 6,
-      image: '/images/malboos/collections/category-makhawar.jpg',
-      caption: 'ألوان الوردي الهادئ والموكا الملكي',
+      image: '/images/malboos/inspiration/inspiration-6.jpg',
+      caption: 'قفطان حريري برونزي بتطريزات يدوية متقنة',
     },
   ];
 

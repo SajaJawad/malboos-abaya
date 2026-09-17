@@ -9,20 +9,20 @@ export const BrandStory: React.FC = () => {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Asymmetric Image Grid */}
-          <div className="lg:col-span-6 relative flex gap-4">
-            <div className="w-2/3 aspect-[3/4] relative rounded-[4px] overflow-hidden border border-[#E8DDD0] shadow-md">
+          <div className="lg:col-span-6 relative flex gap-2">
+            <div className="w-2/3 aspect-[9/16] sm:aspect-[2/3] lg:aspect-[9/16] relative rounded-[4px] overflow-hidden border border-[#E8DDD0] shadow-md">
               <Image
-                src="/images/malboos/hero/hero-1.jpg"
-                alt="عالم ملبوس"
+                src="/images/malboos/abayas/story-main-abaya.jpg"
+                alt="عالم ملبوس - عباية فاخرة"
                 fill
                 sizes="(max-width: 1024px) 70vw, 35vw"
-                className="object-cover"
+                className="object-cover object-center"
               />
             </div>
             <div className="w-1/3 aspect-[3/4] relative rounded-[4px] overflow-hidden border border-[#C4A36B]/40 shadow-sm mt-12">
               <Image
-                src="/images/malboos/collections/makhawar-detail.jpg"
-                alt="تفاصيل التطريز"
+                src="/images/malboos/collections/makhawar-fabric.jpg"
+                alt="تفاصيل القماش المطرز"
                 fill
                 sizes="(max-width: 1024px) 30vw, 15vw"
                 className="object-cover"

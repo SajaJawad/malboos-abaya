@@ -60,8 +60,12 @@ export default function RootLayout({
       lang="ar"
       dir="rtl"
       className={`${notoKufi.variable} ${notoSans.variable} ${cormorant.variable} ${inter.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-[#F7F2EA] text-[#151311] selection:bg-[#C4A36B] selection:text-[#151311]">
+      <body
+        className="min-h-full flex flex-col bg-[#F7F2EA] text-[#151311] selection:bg-[#C4A36B] selection:text-[#151311]"
+        suppressHydrationWarning
+      >
         <CartProvider>
           <WishlistProvider>
             <SearchProvider>

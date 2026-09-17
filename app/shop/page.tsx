@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { SlidersHorizontal, ChevronDown, X, RefreshCw } from 'lucide-react';
+import Image from 'next/image';
+import { SlidersHorizontal, ChevronDown, X, RefreshCw, Gift, Sparkles, HeartHandshake } from 'lucide-react';
 import { PRODUCTS, Product } from '@/data/products';
 import { ProductCard } from '@/components/product/ProductCard';
 import { Container } from '@/components/ui/Container';
@@ -98,25 +99,74 @@ function ShopContent() {
             الرئيسية
           </Link>
           <span>/</span>
-          <span className="text-[#151311] font-medium">متجر ملبوس</span>
+          <span className="text-[#151311] font-medium">
+            {selectedOccasion === 'هدايا' ? 'قسم الهدايا' : 'متجر ملبوس'}
+          </span>
         </div>
 
-        {/* Page Title & Header */}
-        <div className="text-center mb-10 pb-8 border-b border-[#E8DDD0]">
-          <span className="font-cormorant text-xs tracking-[0.3em] text-[#C4A36B] uppercase font-semibold block mb-2">
-            MALBOOS BOUTIQUE
-          </span>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#151311]">
-            {selectedCategory === 'abayas'
-              ? 'تشكيلة العبايات'
-              : selectedCategory === 'makhawer'
-              ? 'تشكيلة المخاوير'
-              : 'جميع المجموعات'}
-          </h1>
-          <p className="text-[#7B746E] text-sm md:text-base mt-2 font-light max-w-lg mx-auto">
-            تصفحي أحدث ابتكاراتنا من العبايات والمخاوير المصممة بروح خليجية متفردة
-          </p>
-        </div>
+        {/* Page Title & Header / Special Gift Hero Banner */}
+        {selectedOccasion === 'هدايا' ? (
+          <div className="mb-10 overflow-hidden rounded-[6px] border border-[#E8DDD0] bg-white shadow-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+              <div className="lg:col-span-6 relative min-h-[280px] sm:min-h-[340px] lg:min-h-[380px]">
+                <Image
+                  src="/images/malboos/occasions/occasion-gifts.jpg"
+                  alt="قسم الهدايا الفاخرة - ملبوس"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-center"
+                  priority
+                />
+              </div>
+              <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-[#FAF7F2]">
+                <div className="space-y-4">
+                  <span className="font-cormorant text-xs tracking-[0.35em] text-[#C4A36B] uppercase font-semibold block">
+                    MALBOOS GIFTING EXPERIENCE
+                  </span>
+                  <div className="w-10 h-[1.5px] bg-[#C4A36B]" />
+                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-normal text-[#151311] leading-tight">
+                    تغليف يليق بعنايتك ومحبتك
+                  </h1>
+                  <p className="text-[#7B746E] text-sm sm:text-base font-light leading-relaxed">
+                    نقدم لكِ تجربة إهداء استثنائية تُجسّد مشاعرك بأرقى صورة. كل قطعة تختارينها تُغلف بعناية فائقة في صناديقنا الملكية الفاخرة، مرفقة بباقة ورد رقيقة وبطاقة إهداء مخصصة بالرسالة التي تختارينها لتصل لصاحبة الهدية بكل حب وفخامة.
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-[#E8DDD0]">
+                    <div className="flex items-center gap-2 text-xs font-medium text-[#151311]">
+                      <Gift className="w-4 h-4 text-[#C4A36B] shrink-0" />
+                      <span>تغليف ملكي فاخر</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs font-medium text-[#151311]">
+                      <Sparkles className="w-4 h-4 text-[#C4A36B] shrink-0" />
+                      <span>باقة ورد وبطاقة إهداء</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs font-medium text-[#151311]">
+                      <HeartHandshake className="w-4 h-4 text-[#C4A36B] shrink-0" />
+                      <span>توصيل مباشر لصاحبة الهدية</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="text-center mb-10 pb-8 border-b border-[#E8DDD0]">
+            <span className="font-cormorant text-xs tracking-[0.3em] text-[#C4A36B] uppercase font-semibold block mb-2">
+              MALBOOS BOUTIQUE
+            </span>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#151311]">
+              {selectedCategory === 'abayas'
+                ? 'تشكيلة العبايات'
+                : selectedCategory === 'makhawer'
+                ? 'تشكيلة المخاوير'
+                : selectedOccasion !== 'all'
+                ? `تشكيلة ${selectedOccasion}`
+                : 'جميع المجموعات'}
+            </h1>
+            <p className="text-[#7B746E] text-sm md:text-base mt-2 font-light max-w-lg mx-auto">
+              تصفحي أحدث ابتكاراتنا من العبايات والمخاوير المصممة بروح خليجية متفردة
+            </p>
+          </div>
+        )}
 
         {/* Top Filter Bar & Sorting */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8 bg-[#E8DDD0]/30 p-4 rounded-[3px] border border-[#E8DDD0]">

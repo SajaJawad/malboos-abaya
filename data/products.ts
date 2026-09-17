@@ -44,7 +44,7 @@ export const PRODUCTS: Product[] = [
     featured: true,
     bestSeller: true,
     newArrival: false,
-    occasion: 'مناسبات',
+    occasion: 'هدايا',
   },
   {
     id: 'ab-2',
@@ -91,7 +91,7 @@ export const PRODUCTS: Product[] = [
     featured: true,
     bestSeller: true,
     newArrival: false,
-    occasion: 'العيد',
+    occasion: 'هدايا',
   },
   {
     id: 'ab-4',
@@ -174,7 +174,7 @@ export const PRODUCTS: Product[] = [
     featured: true,
     bestSeller: false,
     newArrival: true,
-    occasion: 'مناسبات',
+    occasion: 'هدايا',
   },
   {
     id: 'ab-8',
@@ -281,7 +281,7 @@ export const PRODUCTS: Product[] = [
     featured: true,
     bestSeller: true,
     newArrival: false,
-    occasion: 'مناسبات',
+    occasion: 'هدايا',
   },
   {
     id: 'mk-2',
@@ -322,7 +322,7 @@ export const PRODUCTS: Product[] = [
     featured: true,
     bestSeller: false,
     newArrival: true,
-    occasion: 'مناسبات',
+    occasion: 'هدايا',
   },
   {
     id: 'mk-4',
@@ -363,7 +363,7 @@ export const PRODUCTS: Product[] = [
     featured: true,
     bestSeller: false,
     newArrival: true,
-    occasion: 'العيد',
+    occasion: 'هدايا',
   },
   {
     id: 'mk-6',
@@ -505,7 +505,7 @@ export const PRODUCTS: Product[] = [
     featured: true,
     bestSeller: true,
     newArrival: true,
-    occasion: 'مناسبات',
+    occasion: 'هدايا',
   },
   {
     id: 'mk-13',
@@ -546,7 +546,7 @@ export const PRODUCTS: Product[] = [
     featured: true,
     bestSeller: true,
     newArrival: false,
-    occasion: 'مناسبات',
+    occasion: 'هدايا',
   },
   {
     id: 'mk-15',
