@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { SlidersHorizontal, ChevronDown, X, RefreshCw, Gift, Sparkles, HeartHandshake } from 'lucide-react';
+import { SlidersHorizontal, ChevronDown, X, RefreshCw, Gift, Sparkles, HeartHandshake, Moon, Feather, Crown } from 'lucide-react';
 import { PRODUCTS, Product } from '@/data/products';
 import { ProductCard } from '@/components/product/ProductCard';
 import { Container } from '@/components/ui/Container';
@@ -100,22 +100,117 @@ function ShopContent() {
           </Link>
           <span>/</span>
           <span className="text-[#151311] font-medium">
-            {selectedOccasion === 'هدايا' ? 'قسم الهدايا' : 'متجر ملبوس'}
+            {selectedOccasion === 'العيد'
+              ? 'تشكيلة العيد الفاخرة'
+              : selectedOccasion === 'رمضان'
+              ? 'تشكيلة رمضان المبارك'
+              : selectedOccasion === 'هدايا'
+              ? 'قسم الهدايا'
+              : 'متجر ملبوس'}
           </span>
         </div>
 
-        {/* Page Title & Header / Special Gift Hero Banner */}
-        {selectedOccasion === 'هدايا' ? (
+        {/* Page Title & Header / Special Occasion Hero Banners */}
+        {selectedOccasion === 'العيد' ? (
+          <div className="mb-10 overflow-hidden rounded-[6px] border border-[#E8DDD0] bg-white shadow-sm transition-all">
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+              <div className="lg:col-span-6 relative min-h-[300px] sm:min-h-[360px] lg:min-h-[420px] w-full">
+                <Image
+                  src="/images/malboos/occasions/occasion-eid.jpg"
+                  alt="تشكيلة العيد الفاخرة - ملبوس"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-center w-full h-full"
+                  priority
+                  unoptimized
+                />
+              </div>
+              <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-[#FAF7F2]">
+                <div className="space-y-4">
+                  <span className="font-cormorant text-xs tracking-[0.35em] text-[#C4A36B] uppercase font-semibold block">
+                    EID COLLECTION — MALBOOS
+                  </span>
+                  <div className="w-10 h-[1.5px] bg-[#C4A36B]" />
+                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-normal text-[#151311] leading-tight">
+                    فخامة وتطريزات تليق ببهجة العيد
+                  </h1>
+                  <p className="text-[#7B746E] text-sm sm:text-base font-light leading-relaxed">
+                    احتفلي بأجواء العيد السعيدة بإطلالة ملكية ساحرة. تشكيلة حصرية تجمع بين أرقى أقمشة الحرير والجكار والكريب، مشغولة بتطريزات الزري والقصب والخرز البراق لتضمن لكِ حضوراً يبهر الجميع في كافة الزيارات والمناسبات السعيدة.
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-[#E8DDD0]">
+                    <div className="flex items-center gap-2 text-xs font-medium text-[#151311]">
+                      <Crown className="w-4 h-4 text-[#C4A36B] shrink-0" />
+                      <span>حضور ملكي فاخر</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs font-medium text-[#151311]">
+                      <Sparkles className="w-4 h-4 text-[#C4A36B] shrink-0" />
+                      <span>تطريز قصب وخرز براق</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs font-medium text-[#151311]">
+                      <Gift className="w-4 h-4 text-[#C4A36B] shrink-0" />
+                      <span>تغليف ملكي خاص بالعيد</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : selectedOccasion === 'رمضان' ? (
+          <div className="mb-10 overflow-hidden rounded-[6px] border border-[#E8DDD0] bg-white shadow-sm transition-all">
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+              <div className="lg:col-span-6 relative min-h-[300px] sm:min-h-[360px] lg:min-h-[420px] w-full">
+                <Image
+                  src="/images/malboos/occasions/occasion-ramadan.jpg"
+                  alt="تشكيلة رمضان المبارك - ملبوس"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-center w-full h-full"
+                  priority
+                  unoptimized
+                />
+              </div>
+              <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-[#FAF7F2]">
+                <div className="space-y-4">
+                  <span className="font-cormorant text-xs tracking-[0.35em] text-[#C4A36B] uppercase font-semibold block">
+                    RAMADAN COLLECTION — MALBOOS
+                  </span>
+                  <div className="w-10 h-[1.5px] bg-[#C4A36B]" />
+                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-normal text-[#151311] leading-tight">
+                    سكينة وأناقة في ليالي رمضان
+                  </h1>
+                  <p className="text-[#7B746E] text-sm sm:text-base font-light leading-relaxed">
+                    استقبلي الشهر الفضيل بتصاميم تجمع بين الوقار الخليجي والراحة الفائقة. تشكيلة رمضانية حصرية تضم عبايات ومخاوير وأطقم مطرزة بألوان دافئة تمنحك حضوراً ملكياً في الإفطارات والغبقات الرمضانية.
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-[#E8DDD0]">
+                    <div className="flex items-center gap-2 text-xs font-medium text-[#151311]">
+                      <Moon className="w-4 h-4 text-[#C4A36B] shrink-0" />
+                      <span>وقار وأصالة رمضانية</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs font-medium text-[#151311]">
+                      <Feather className="w-4 h-4 text-[#C4A36B] shrink-0" />
+                      <span>أقمشة باردة وانسيابية</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs font-medium text-[#151311]">
+                      <Sparkles className="w-4 h-4 text-[#C4A36B] shrink-0" />
+                      <span>تطريزات يدوية فاخرة</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : selectedOccasion === 'هدايا' ? (
           <div className="mb-10 overflow-hidden rounded-[6px] border border-[#E8DDD0] bg-white shadow-sm">
             <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
-              <div className="lg:col-span-6 relative min-h-[280px] sm:min-h-[340px] lg:min-h-[380px]">
+              <div className="lg:col-span-6 relative min-h-[280px] sm:min-h-[340px] lg:min-h-[380px] w-full">
                 <Image
                   src="/images/malboos/occasions/occasion-gifts.jpg"
                   alt="قسم الهدايا الفاخرة - ملبوس"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover object-center"
+                  className="object-cover object-center w-full h-full"
                   priority
+                  unoptimized
                 />
               </div>
               <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-[#FAF7F2]">
