@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, ChevronRight, ChevronLeft } from 'lucide-react';
@@ -32,6 +32,15 @@ export const Hero: React.FC = () => {
     },
   ];
 
+  // Auto-play interval for continuous slide changes
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
   const handleNext = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
@@ -50,15 +59,24 @@ export const Hero: React.FC = () => {
           <div className="lg:col-span-7 relative min-h-[450px] lg:min-h-full bg-[#F7F2EA] order-1 lg:order-1 overflow-hidden group flex items-center justify-center p-4 lg:p-6">
             {/* Elegant Subtle Panel Frame */}
             <div className="relative w-full h-full min-h-[400px] lg:min-h-[600px] bg-[#E8DDD0]/20 rounded-[3px] border border-[#E8DDD0]/60 flex items-center justify-center overflow-hidden">
-              {/* 100% Full Uncropped Image */}
-              <Image
-                src={activeSlide.image}
-                alt={activeSlide.title}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 55vw"
-                className="object-contain object-center p-2 md:p-4 z-10 transition-all duration-700 transform group-hover:scale-[1.01]"
-              />
+              {/* 100% Full Uncropped Image with Fade Transition */}
+              {slides.map((slide, idx) => (
+                <div
+                  key={idx}
+                  className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                    currentSlide === idx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                  }`}
+                >
+                  <Image
+                    src={slide.image}
+                    alt={slide.title}
+                    fill
+                    priority={idx === 0}
+                    sizes="(max-width: 1024px) 100vw, 55vw"
+                    className="object-contain object-center p-2 md:p-4 transition-all duration-700 transform group-hover:scale-[1.01]"
+                  />
+                </div>
+              ))}
 
               {/* Bottom Left Warm Slider Indicator */}
               <div className="absolute bottom-4 left-4 z-20 bg-white/90 backdrop-blur-md text-[#151311] px-3.5 py-1.5 text-xs font-cormorant tracking-widest flex items-center gap-2 rounded-[2px] border border-[#E8DDD0] shadow-xs">
@@ -77,11 +95,11 @@ export const Hero: React.FC = () => {
                 MALBOOS LUXURY COLLECTION
               </span>
 
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#151311] leading-tight transition-all duration-500">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#151311] leading-tight transition-all duration-700 ease-in-out">
                 {activeSlide.title}
               </h1>
 
-              <p className="text-[#7B746E] text-base md:text-lg font-light leading-relaxed max-w-md pt-2">
+              <p className="text-[#7B746E] text-base md:text-lg font-light leading-relaxed max-w-md pt-2 transition-all duration-700 ease-in-out">
                 {activeSlide.subheading}
               </p>
 
@@ -112,7 +130,7 @@ export const Hero: React.FC = () => {
                   <button
                     key={idx}
                     onClick={() => setCurrentSlide(idx)}
-                    className={`h-1 transition-all ${
+                    className={`h-1 transition-all duration-500 ${
                       currentSlide === idx ? 'w-8 bg-[#C4A36B]' : 'w-2 bg-[#E8DDD0]'
                     }`}
                     aria-label={`انتقل للشريحة ${idx + 1}`}

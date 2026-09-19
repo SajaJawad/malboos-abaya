@@ -9,6 +9,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { CartDrawer } from '@/components/commerce/CartDrawer';
 import { SearchOverlay } from '@/components/commerce/SearchOverlay';
+import { ScrollToTop } from '@/components/ui/ScrollToTop';
 import { SITE_CONFIG } from '@/lib/seo';
 
 export const metadata: Metadata = {
@@ -123,6 +124,7 @@ export default function RootLayout({
               <Footer />
               <CartDrawer />
               <SearchOverlay />
+              <ScrollToTop />
             </SearchProvider>
           </WishlistProvider>
         </CartProvider>

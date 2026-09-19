@@ -25,25 +25,25 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
 
   return (
     <div
-      className={`group flex flex-col relative ${className}`}
+      className={`group flex flex-col relative cursor-pointer ${className}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Image Wrapper */}
-      <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#FAF7F2] rounded-[3px] border border-[#E8DDD0]/50 flex items-center justify-center">
-        <Link href={`/product/${product.slug}`} className="block w-full h-full">
+      <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#FAF7F2] rounded-[3px] border border-[#E8DDD0]/50 flex items-center justify-center cursor-pointer">
+        <Link href={`/product/${product.slug}`} className="block w-full h-full cursor-pointer">
           <Image
             src={mainImage}
             alt={product.name}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-contain object-center p-1 transition-transform duration-700 group-hover:scale-105"
+            className="object-contain object-center p-1 transition-transform duration-700 group-hover:scale-105 cursor-pointer"
           />
         </Link>
 
         {/* Badge Top Right */}
         {product.badge && (
-          <div className="absolute top-3 right-3 z-10">
+          <div className="absolute top-3 right-3 z-10 pointer-events-none">
             <Badge
               variant={
                 product.badge === 'الأكثر مبيعًا'
@@ -62,9 +62,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
         <button
           onClick={(e) => {
             e.preventDefault();
+            e.stopPropagation();
             toggleWishlist(product);
           }}
-          className={`absolute top-3 left-3 z-10 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 ${
+          className={`absolute top-3 left-3 z-10 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${
             isFavorite
               ? 'bg-[#151311] text-[#C4A36B]'
               : 'bg-[#F7F2EA]/80 backdrop-blur-xs text-[#151311] hover:bg-[#151311] hover:text-[#F7F2EA]'
@@ -78,9 +79,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
         <button
           onClick={(e) => {
             e.preventDefault();
+            e.stopPropagation();
             addToCart(product, 1);
           }}
-          className="absolute bottom-3 left-3 z-10 w-10 h-10 rounded-full bg-[#151311] text-[#F7F2EA] flex items-center justify-center opacity-90 group-hover:opacity-100 hover:bg-[#C4A36B] hover:text-[#151311] transition-all duration-300 shadow-md transform group-hover:scale-110"
+          className="absolute bottom-3 left-3 z-10 w-10 h-10 rounded-full bg-[#151311] text-[#F7F2EA] flex items-center justify-center opacity-90 group-hover:opacity-100 hover:bg-[#C4A36B] hover:text-[#151311] transition-all duration-300 shadow-md transform group-hover:scale-110 cursor-pointer"
           aria-label="إضافة سريعة للسلة"
           title="إضافة سريعة للسلة"
         >
@@ -89,7 +91,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
       </div>
 
       {/* Info Block */}
-      <div className="pt-3 pb-1 flex flex-col">
+      <div className="pt-3 pb-1 flex flex-col cursor-pointer">
         <div className="flex items-center justify-between text-[11px] text-[#7B746E] mb-1">
           <span>{product.categoryAr}</span>
           {product.occasion && <span>{product.occasion}</span>}
@@ -97,7 +99,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
 
         <Link
           href={`/product/${product.slug}`}
-          className="text-sm font-normal text-[#151311] hover:text-[#C4A36B] transition-colors line-clamp-1"
+          className="text-sm font-normal text-[#151311] hover:text-[#C4A36B] transition-colors line-clamp-1 cursor-pointer"
         >
           {product.name}
         </Link>
