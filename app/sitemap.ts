@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next';
 import { PRODUCTS } from '@/data/products';
+import { SITE_CONFIG } from '@/lib/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://malboos.com';
+  const baseUrl = SITE_CONFIG.siteUrl;
 
   const productUrls = PRODUCTS.map((p) => ({
     url: `${baseUrl}/product/${p.slug}`,
@@ -11,23 +12,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const staticUrls = [
-    '',
+  const categoryUrls = [
     '/shop',
-    '/about',
-    '/contact',
-    '/shipping',
-    '/returns',
-    '/privacy',
-    '/terms',
-    '/size-guide',
-    '/faq',
+    '/shop?category=abayas',
+    '/shop?category=makhawer',
+    '/shop?occasion=رمضان',
+    '/shop?occasion=العيد',
+    '/shop?occasion=هدايا',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'daily' as const,
+    priority: 0.9,
+  }));
+
+  const staticUrls = [
+    '',
+    '/about',
+    '/contact',
+    '/faq',
+    '/shipping',
+    '/returns',
+    '/size-guide',
+    '/privacy',
+    '/terms',
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
     priority: route === '' ? 1.0 : 0.7,
   }));
 
-  return [...staticUrls, ...productUrls];
+  return [...staticUrls, ...categoryUrls, ...productUrls];
 }

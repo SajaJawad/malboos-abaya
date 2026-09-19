@@ -1,5 +1,22 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
+import { buildCanonicalUrl } from '@/lib/seo';
+
+export const metadata: Metadata = {
+  title: 'سياسة الاستبدال والاسترجاع | ملبوس',
+  description:
+    'تعرفي على شروط وإجراءات الاستبدال والاسترجاع المرنة خلال 7 أيام في متجر ملبوس لضمان تجربة تسوق آمنة ومريحة.',
+  alternates: {
+    canonical: buildCanonicalUrl('/returns'),
+  },
+  openGraph: {
+    title: 'سياسة الاستبدال والاسترجاع | ملبوس',
+    description:
+      'شروط وإجراءات الاستبدال والاسترجاع المرنة خلال 7 أيام في متجر ملبوس.',
+    url: buildCanonicalUrl('/returns'),
+  },
+};
 
 export default function ReturnsPolicyPage() {
   return (

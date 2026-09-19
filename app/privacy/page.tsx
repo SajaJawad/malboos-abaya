@@ -1,5 +1,22 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
+import { buildCanonicalUrl } from '@/lib/seo';
+
+export const metadata: Metadata = {
+  title: 'سياسة الخصوصية | ملبوس',
+  description:
+    'نلتزم في ملبوس بحماية خصوصية بياناتك الشخصية وتوفير تجربة تسوق أمنة وفق أعلى معايير الأمان المتبعة.',
+  alternates: {
+    canonical: buildCanonicalUrl('/privacy'),
+  },
+  openGraph: {
+    title: 'سياسة الخصوصية | ملبوس',
+    description:
+      'نلتزم في ملبوس بحماية خصوصية بياناتك الشخصية وتوفير تجربة تسوق آمنة.',
+    url: buildCanonicalUrl('/privacy'),
+  },
+};
 
 export default function PrivacyPage() {
   return (

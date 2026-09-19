@@ -9,6 +9,61 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { CartDrawer } from '@/components/commerce/CartDrawer';
 import { SearchOverlay } from '@/components/commerce/SearchOverlay';
+import { SITE_CONFIG } from '@/lib/seo';
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_CONFIG.siteUrl),
+  title: {
+    default: SITE_CONFIG.defaultTitle,
+    template: SITE_CONFIG.titleTemplate,
+  },
+  description: SITE_CONFIG.description,
+  keywords: SITE_CONFIG.keywords,
+  alternates: {
+    canonical: SITE_CONFIG.siteUrl,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: [
+      { url: '/images/malboos/malboos-logo.png' },
+      { url: '/favicon.png', type: 'image/png' },
+    ],
+    shortcut: '/images/malboos/malboos-logo.png',
+    apple: '/images/malboos/malboos-logo.png',
+  },
+  openGraph: {
+    title: SITE_CONFIG.defaultTitle,
+    description: SITE_CONFIG.description,
+    url: SITE_CONFIG.siteUrl,
+    siteName: 'ملبوس | MALBOOS',
+    locale: SITE_CONFIG.locale,
+    type: 'website',
+    images: [
+      {
+        url: `${SITE_CONFIG.siteUrl}/images/malboos/hero/hero-1.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'ملبوس — عبايات ومخاوير بتصاميم عصرية',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_CONFIG.defaultTitle,
+    description: SITE_CONFIG.description,
+    images: [`${SITE_CONFIG.siteUrl}/images/malboos/hero/hero-1.jpg`],
+  },
+};
 
 const notoKufi = Noto_Kufi_Arabic({
   subsets: ['arabic'],
@@ -37,26 +92,6 @@ const inter = Inter({
   weight: ['300', '400', '500', '600'],
   display: 'swap',
 });
-
-export const metadata: Metadata = {
-  title: 'ملبوس | MALBOOS — عبايات ومخاوير بتصاميم عصرية',
-  description: 'اكتشفي ملبوس، وجهتك الأولى للعبايات الفاخرة والمخاوير بتصاميم تجمع بين الأصالة الخليجية والأناقة المعاصرة.',
-  keywords: ['ملبوس', 'عبايات', 'مخاوير', 'ازياء خليجية', 'عباية كلوش', 'مخوار مطرز'],
-  icons: {
-    icon: [
-      { url: '/images/malboos/malboos-logo.png' },
-      { url: '/favicon.png', type: 'image/png' },
-    ],
-    shortcut: '/images/malboos/malboos-logo.png',
-    apple: '/images/malboos/malboos-logo.png',
-  },
-  openGraph: {
-    title: 'ملبوس | MALBOOS — MORE THAN A PIECE',
-    description: 'عبايات ومخاوير بتصاميم عصرية تجمع بين الأصالة والحداثة',
-    locale: 'ar_SA',
-    type: 'website',
-  },
-};
 
 export default function RootLayout({
   children,

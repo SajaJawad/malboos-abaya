@@ -1,7 +1,24 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Sparkles, Heart, ShieldCheck, Feather, Award } from 'lucide-react';
+import { buildCanonicalUrl } from '@/lib/seo';
+
+export const metadata: Metadata = {
+  title: 'عن ملبوس | قصتنا وأصالتنا',
+  description:
+    'تعرفي على قصتنا في ملبوس. علامة تجارية سُعودية وخليجية متخصصة في تصميم العبايات والمخاوير الفاخرة برؤية تجمع بين عراقة التراث والأناقة المعاصرة.',
+  alternates: {
+    canonical: buildCanonicalUrl('/about'),
+  },
+  openGraph: {
+    title: 'عن ملبوس | قصتنا وأصالتنا',
+    description:
+      'تعرفي على قصتنا في ملبوس. علامة تجارية سُعودية وخليجية متخصصة في تصميم العبايات والمخاوير الفاخرة.',
+    url: buildCanonicalUrl('/about'),
+  },
+};
 
 export default function AboutPage() {
   const pillars = [

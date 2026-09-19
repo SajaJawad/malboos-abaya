@@ -1,5 +1,22 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
+import { buildCanonicalUrl } from '@/lib/seo';
+
+export const metadata: Metadata = {
+  title: 'الشروط والأحكام | ملبوس',
+  description:
+    'الشروط والأحكام الخاصة باستعمال متجر ملبوس وحقوق الملكية الفكرية وضوابط الشراء والطلب.',
+  alternates: {
+    canonical: buildCanonicalUrl('/terms'),
+  },
+  openGraph: {
+    title: 'الشروط والأحكام | ملبوس',
+    description:
+      'الشروط والأحكام الخاصة باستعمال متجر ملبوس وحقوق الملكية الفكرية.',
+    url: buildCanonicalUrl('/terms'),
+  },
+};
 
 export default function TermsPage() {
   return (

@@ -1,5 +1,22 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
+import { buildCanonicalUrl } from '@/lib/seo';
+
+export const metadata: Metadata = {
+  title: 'سياسة الشحن والتوصيل | ملبوس',
+  description:
+    'تعرفي على التفاصيل الكاملة لشحن وتوصيل الطلبات داخل الرياض، مدن المملكة العربية السعودية، ودول مجلس التعاون الخليجي من ملبوس.',
+  alternates: {
+    canonical: buildCanonicalUrl('/shipping'),
+  },
+  openGraph: {
+    title: 'سياسة الشحن والتوصيل | ملبوس',
+    description:
+      'التفاصيل الكاملة لشحن وتوصيل الطلبات داخل المملكة ودول الخليج العربي من ملبوس.',
+    url: buildCanonicalUrl('/shipping'),
+  },
+};
 
 export default function ShippingPolicyPage() {
   return (

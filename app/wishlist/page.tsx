@@ -2,10 +2,11 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Heart, ArrowLeft } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
-import { useWishlist } from '@/context/WishlistContext';
+import { EmptyState } from '@/components/ui/EmptyState';
 import { ProductCard } from '@/components/product/ProductCard';
+import { useWishlist } from '@/context/WishlistContext';
 
 export default function WishlistPage() {
   const { wishlist, wishlistCount } = useWishlist();
@@ -32,20 +33,13 @@ export default function WishlistPage() {
         </div>
 
         {wishlist.length === 0 ? (
-          <div className="text-center py-20 bg-white rounded-[3px] border border-[#E8DDD0] max-w-xl mx-auto p-8">
-            <Heart className="w-16 h-16 text-[#C4A36B]/40 mx-auto mb-4 stroke-[1]" />
-            <h2 className="text-xl font-normal text-[#151311] mb-2">قائمة المفضلة فارغة حالياً</h2>
-            <p className="text-[#7B746E] text-xs mb-6 font-light">
-              احفظي القطع التي تنال إعجابك أثناء التصفح للرجوع إليها لاحقاً
-            </p>
-            <Link
-              href="/shop"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-[#151311] text-[#F7F2EA] text-xs font-medium hover:bg-[#C4A36B] hover:text-[#151311] transition-all rounded-[2px]"
-            >
-              <span>استكشاف المنتجات</span>
-              <ArrowLeft className="w-4 h-4" />
-            </Link>
-          </div>
+          <EmptyState
+            icon={Heart}
+            title="قائمة المفضلة فارغة"
+            description="احفظي القطع التي أحببتِها أثناء التصفح لتعودي إليها لاحقاً بضغطة واحدة."
+            actionLabel="ابدئي التسوق"
+            actionHref="/shop"
+          />
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {wishlist.map((product) => (
