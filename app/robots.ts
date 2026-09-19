@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { SITE_CONFIG } from '@/lib/seo';
+import { SITE_URL } from '@/lib/seo';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/cart', '/checkout', '/account', '/wishlist'],
     },
-    sitemap: `${SITE_CONFIG.siteUrl}/sitemap.xml`,
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

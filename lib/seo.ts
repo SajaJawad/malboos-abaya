@@ -1,7 +1,11 @@
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://malboos.com'
+).replace(/\/$/, '');
+
 export const SITE_CONFIG = {
   name: 'ملبوس — MALBOOS',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://malboos.com',
-  defaultTitle: 'ملبوس | عبايات ومخاوير بتصاميم عصرية',
+  siteUrl: SITE_URL,
+  defaultTitle: 'ملبوس | عبايات ومخاوير فاخرة بتصاميم خليجية عصرية',
   titleTemplate: '%s | ملبوس',
   description:
     'اكتشفي ملبوس، وجهتك الأولى للعبايات الفاخرة والمخاوير بتصاميم تجمع بين الأصالة الخليجية والأناقة المعاصرة.',
@@ -27,6 +31,7 @@ export const SITE_CONFIG = {
 };
 
 export function buildCanonicalUrl(pathname = ''): string {
-  const cleanPath = pathname.split('?')[0].replace(/\/$/, '');
-  return `${SITE_CONFIG.siteUrl}${cleanPath}`;
+  if (!pathname) return SITE_URL;
+  const cleanPath = pathname.startsWith('/') ? pathname : `/${pathname}`;
+  return `${SITE_URL}${cleanPath}`;
 }

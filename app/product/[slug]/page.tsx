@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { PRODUCTS } from '@/data/products';
+import { getProductBySlug, PRODUCTS } from '@/data/products';
 import { ProductDetailClient } from '@/components/product/ProductDetailClient';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { getProductSchema, getBreadcrumbSchema } from '@/lib/schema';
-import { SITE_CONFIG, buildCanonicalUrl } from '@/lib/seo';
+import { SITE_URL, buildCanonicalUrl } from '@/lib/seo';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -12,22 +12,22 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = PRODUCTS.find((p) => p.slug === slug);
+  const product = getProductBySlug(slug);
 
   if (!product) {
     return {
-      title: 'المنتج غير موجود | ملبوس',
+      title: 'المنتج غير موجود',
       description: 'المنتج المطلوب غير متاح حالياً في متجر ملبوس.',
     };
   }
 
-  const title = `${product.name} | ملبوس`;
+  const title = product.name;
   const description = `${product.name} من ملبوس. ${product.description} قماش ${product.fabric} فاخر. تسوقي أحدث العبايات والمخاوير بتصاميم خليجية عصرية.`;
   const canonicalUrl = buildCanonicalUrl(`/product/${product.slug}`);
 
   const imageUrl = product.images[0]?.startsWith('http')
     ? product.images[0]
-    : `${SITE_CONFIG.siteUrl}${product.images[0] || '/images/malboos/hero/hero-1.jpg'}`;
+    : `${SITE_URL}${product.images[0] || '/images/malboos/hero/hero-1.jpg'}`;
 
   return {
     title,
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title,
+      title: `${product.name} | ملبوس`,
       description,
       url: canonicalUrl,
       type: 'article',
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: `${product.name} | ملبوس`,
       description,
       images: [imageUrl],
     },
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductDetailPage({ params }: Props) {
   const { slug } = await params;
-  const product = PRODUCTS.find((p) => p.slug === slug);
+  const product = getProductBySlug(slug);
 
   if (!product) {
     notFound();

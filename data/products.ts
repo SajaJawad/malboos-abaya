@@ -569,3 +569,68 @@ export const PRODUCTS: Product[] = [
     occasion: 'رمضان',
   },
 ];
+
+export function getProductBySlug(slug: string): Product | undefined {
+  return PRODUCTS.find((p) => p.slug === slug);
+}
+
+export interface ProductFilters {
+  category?: string;
+  occasion?: string;
+  filter?: string;
+  size?: string;
+  priceRange?: number;
+  sort?: string;
+  searchQuery?: string;
+}
+
+export function getFilteredProducts(filters: ProductFilters = {}): Product[] {
+  let result = [...PRODUCTS];
+
+  if (filters.category && filters.category !== 'all') {
+    result = result.filter((p) => p.category === filters.category);
+  }
+
+  if (filters.filter === 'bestseller') {
+    result = result.filter((p) => p.bestSeller);
+  } else if (filters.filter === 'new') {
+    result = result.filter((p) => p.newArrival);
+  }
+
+  if (filters.size && filters.size !== 'all') {
+    const targetSize = filters.size;
+    result = result.filter((p) => p.sizes.includes(targetSize));
+  }
+
+  if (filters.occasion && filters.occasion !== 'all') {
+    result = result.filter((p) => p.occasion === filters.occasion);
+  }
+
+  if (filters.searchQuery) {
+    const query = filters.searchQuery.trim().toLowerCase();
+    result = result.filter(
+      (p) =>
+        p.name.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query) ||
+        p.categoryAr.toLowerCase().includes(query) ||
+        p.fabric.toLowerCase().includes(query)
+    );
+  }
+
+  if (filters.priceRange) {
+    result = result.filter((p) => p.price <= filters.priceRange!);
+  }
+
+  if (filters.sort === 'price-asc') {
+    result.sort((a, b) => a.price - b.price);
+  } else if (filters.sort === 'price-desc') {
+    result.sort((a, b) => b.price - a.price);
+  } else if (filters.sort === 'bestseller') {
+    result.sort((a, b) => (b.bestSeller ? 1 : 0) - (a.bestSeller ? 1 : 0));
+  } else {
+    result.sort((a, b) => (b.newArrival ? 1 : 0) - (a.newArrival ? 1 : 0));
+  }
+
+  return result;
+}
+

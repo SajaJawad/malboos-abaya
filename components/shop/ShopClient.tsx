@@ -5,19 +5,24 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { SlidersHorizontal, ChevronDown, X, RefreshCw, Gift, Sparkles, HeartHandshake, Moon, Feather, Crown } from 'lucide-react';
-import { PRODUCTS } from '@/data/products';
+import { PRODUCTS, Product } from '@/data/products';
 import { ProductCard } from '@/components/product/ProductCard';
 import { Container } from '@/components/ui/Container';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { ProductGridSkeleton } from '@/components/ui/ProductGridSkeleton';
 
-function ShopContent() {
+interface ShopClientProps {
+  initialProducts?: Product[];
+}
+
+function ShopContent({ initialProducts }: ShopClientProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const categoryParam = searchParams.get('category') || 'all';
   const filterParam = searchParams.get('filter') || 'all';
   const occasionParam = searchParams.get('occasion') || 'all';
+  const qParam = searchParams.get('q') || '';
 
   const [selectedCategory, setSelectedCategory] = useState<string>(categoryParam);
   const [selectedSize, setSelectedSize] = useState<string>('all');
@@ -46,8 +51,9 @@ function ShopContent() {
 
   // Filter products logic
   const filteredProducts = useMemo(() => {
-    let result = [...PRODUCTS];
+    let result = initialProducts ? [...initialProducts] : [...PRODUCTS];
 
+    // If client interaction changed filter states from defaults:
     if (selectedCategory !== 'all') {
       result = result.filter((p) => p.category === selectedCategory);
     }
@@ -66,6 +72,16 @@ function ShopContent() {
       result = result.filter((p) => p.occasion === selectedOccasion);
     }
 
+    if (qParam) {
+      const q = qParam.toLowerCase();
+      result = result.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q) ||
+          p.categoryAr.toLowerCase().includes(q)
+      );
+    }
+
     result = result.filter((p) => p.price <= priceRange);
 
     // Sorting
@@ -76,12 +92,11 @@ function ShopContent() {
     } else if (sortOption === 'bestseller') {
       result.sort((a, b) => (b.bestSeller ? 1 : 0) - (a.bestSeller ? 1 : 0));
     } else {
-      // default newest
       result.sort((a, b) => (b.newArrival ? 1 : 0) - (a.newArrival ? 1 : 0));
     }
 
     return result;
-  }, [selectedCategory, filterParam, selectedSize, selectedOccasion, priceRange, sortOption]);
+  }, [initialProducts, selectedCategory, filterParam, selectedSize, selectedOccasion, qParam, priceRange, sortOption]);
 
   const resetFilters = () => {
     setSelectedCategory('all');
@@ -537,7 +552,7 @@ function ShopContent() {
   );
 }
 
-export function ShopClient() {
+export function ShopClient({ initialProducts }: ShopClientProps) {
   return (
     <Suspense
       fallback={
@@ -548,7 +563,7 @@ export function ShopClient() {
         </div>
       }
     >
-      <ShopContent />
+      <ShopContent initialProducts={initialProducts} />
     </Suspense>
   );
 }

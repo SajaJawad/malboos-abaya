@@ -11,21 +11,23 @@ import { InspirationGrid } from '@/components/home/InspirationGrid';
 import { Newsletter } from '@/components/home/Newsletter';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { getOrganizationSchema, getWebSiteSchema } from '@/lib/schema';
-import { SITE_CONFIG } from '@/lib/seo';
+import { SITE_CONFIG, SITE_URL } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'ملبوس | عبايات ومخاوير فاخرة بتصاميم خليجية عصرية',
+  title: {
+    absolute: 'ملبوس | عبايات ومخاوير فاخرة بتصاميم خليجية عصرية',
+  },
   description:
     'تسوقي أحدث العبايات والمخاوير من ملبوس، بتصاميم تجمع بين الأصالة الخليجية، التفاصيل الراقية، والأناقة المعاصرة.',
   keywords: SITE_CONFIG.keywords,
   alternates: {
-    canonical: SITE_CONFIG.siteUrl,
+    canonical: SITE_URL,
   },
   openGraph: {
     title: 'ملبوس | عبايات ومخاوير فاخرة بتصاميم خليجية عصرية',
     description:
       'تسوقي أحدث العبايات والمخاوير من ملبوس، بتصاميم تجمع بين الأصالة الخليجية، التفاصيل الراقية، والأناقة المعاصرة.',
-    url: SITE_CONFIG.siteUrl,
+    url: SITE_URL,
     type: 'website',
   },
 };

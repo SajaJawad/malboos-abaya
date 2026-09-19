@@ -1,13 +1,13 @@
 import { Product } from '@/data/products';
-import { SITE_CONFIG } from './seo';
+import { SITE_CONFIG, SITE_URL } from './seo';
 
 export function getOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'ملبوس — MALBOOS',
-    url: SITE_CONFIG.siteUrl,
-    logo: `${SITE_CONFIG.siteUrl}/images/malboos/malboos-logo.png`,
+    name: SITE_CONFIG.name,
+    url: SITE_URL,
+    logo: `${SITE_URL}/images/malboos/malboos-logo.png`,
     description: SITE_CONFIG.description,
     sameAs: [
       SITE_CONFIG.socialHandles.instagram,
@@ -21,24 +21,16 @@ export function getWebSiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'ملبوس — MALBOOS',
-    url: SITE_CONFIG.siteUrl,
+    name: SITE_CONFIG.name,
+    url: SITE_URL,
     inLanguage: 'ar',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${SITE_CONFIG.siteUrl}/shop?q={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
   };
 }
 
 export function getProductSchema(product: Product) {
   const imageUrl = product.images[0]?.startsWith('http')
     ? product.images[0]
-    : `${SITE_CONFIG.siteUrl}${product.images[0] || '/images/malboos/abayas/abaya-1.jpg'}`;
+    : `${SITE_URL}${product.images[0] || '/images/malboos/abayas/abaya-1.jpg'}`;
 
   return {
     '@context': 'https://schema.org',
@@ -54,14 +46,14 @@ export function getProductSchema(product: Product) {
     },
     offers: {
       '@type': 'Offer',
-      url: `${SITE_CONFIG.siteUrl}/product/${product.slug}`,
+      url: `${SITE_URL}/product/${product.slug}`,
       priceCurrency: 'SAR',
       price: product.price,
       itemCondition: 'https://schema.org/NewCondition',
       availability: product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       seller: {
         '@type': 'Organization',
-        name: 'ملبوس — MALBOOS',
+        name: SITE_CONFIG.name,
       },
     },
   };
@@ -75,7 +67,7 @@ export function getBreadcrumbSchema(items: { name: string; item: string }[]) {
       '@type': 'ListItem',
       position: index + 1,
       name: el.name,
-      item: el.item.startsWith('http') ? el.item : `${SITE_CONFIG.siteUrl}${el.item}`,
+      item: el.item.startsWith('http') ? el.item : `${SITE_URL}${el.item}`,
     })),
   };
 }

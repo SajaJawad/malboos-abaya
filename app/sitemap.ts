@@ -1,12 +1,10 @@
 import { MetadataRoute } from 'next';
 import { PRODUCTS } from '@/data/products';
-import { SITE_CONFIG } from '@/lib/seo';
+import { SITE_URL } from '@/lib/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = SITE_CONFIG.siteUrl;
-
   const productUrls = PRODUCTS.map((p) => ({
-    url: `${baseUrl}/product/${p.slug}`,
+    url: `${SITE_URL}/product/${p.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
@@ -20,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/shop?occasion=العيد',
     '/shop?occasion=هدايا',
   ].map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: `${SITE_URL}${route}`,
     lastModified: new Date(),
     changeFrequency: 'daily' as const,
     priority: 0.9,
@@ -37,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/privacy',
     '/terms',
   ].map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: `${SITE_URL}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: route === '' ? 1.0 : 0.7,
