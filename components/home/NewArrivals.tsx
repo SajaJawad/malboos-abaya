@@ -1,17 +1,24 @@
 'use client';
 
-import React, { useState } from 'react';
-import { SectionHeading } from '@/components/ui/SectionHeading';
+import React, { useState, useMemo } from 'react';
 import { ProductCard } from '@/components/product/ProductCard';
 import { PRODUCTS } from '@/data/products';
 
 export const NewArrivals: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'all' | 'abayas' | 'makhawer'>('all');
 
-  const filteredProducts = PRODUCTS.filter((p) => {
-    if (activeTab === 'all') return true;
-    return p.category === activeTab;
-  }).slice(0, 4);
+  const filteredProducts = useMemo(() => {
+    if (activeTab === 'abayas') {
+      return PRODUCTS.filter((p) => p.category === 'abayas' && p.newArrival).slice(0, 4);
+    }
+    if (activeTab === 'makhawer') {
+      return PRODUCTS.filter((p) => p.category === 'makhawer' && p.newArrival).slice(0, 4);
+    }
+    // 'all' tab: balanced 50/50 mix
+    const abayas = PRODUCTS.filter((p) => p.category === 'abayas' && p.newArrival).slice(0, 2);
+    const makhawer = PRODUCTS.filter((p) => p.category === 'makhawer' && p.newArrival).slice(0, 2);
+    return [abayas[0], makhawer[0], abayas[1], makhawer[1]].filter(Boolean);
+  }, [activeTab]);
 
   return (
     <section className="py-12 lg:py-16 bg-[#F7F2EA]">
@@ -36,7 +43,7 @@ export const NewArrivals: React.FC = () => {
           <div className="flex items-center gap-2 mt-4 md:mt-0 bg-[#E8DDD0]/40 p-1 rounded-[3px] border border-[#E8DDD0]">
             <button
               onClick={() => setActiveTab('all')}
-              className={`px-5 py-2 text-xs md:text-sm font-medium transition-all rounded-[2px] ${
+              className={`px-5 py-2 text-xs md:text-sm font-medium transition-all rounded-[2px] cursor-pointer ${
                 activeTab === 'all'
                   ? 'bg-[#151311] text-[#F7F2EA] shadow-xs'
                   : 'text-[#7B746E] hover:text-[#151311]'
@@ -46,7 +53,7 @@ export const NewArrivals: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('abayas')}
-              className={`px-5 py-2 text-xs md:text-sm font-medium transition-all rounded-[2px] ${
+              className={`px-5 py-2 text-xs md:text-sm font-medium transition-all rounded-[2px] cursor-pointer ${
                 activeTab === 'abayas'
                   ? 'bg-[#151311] text-[#F7F2EA] shadow-xs'
                   : 'text-[#7B746E] hover:text-[#151311]'
@@ -56,7 +63,7 @@ export const NewArrivals: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('makhawer')}
-              className={`px-5 py-2 text-xs md:text-sm font-medium transition-all rounded-[2px] ${
+              className={`px-5 py-2 text-xs md:text-sm font-medium transition-all rounded-[2px] cursor-pointer ${
                 activeTab === 'makhawer'
                   ? 'bg-[#151311] text-[#F7F2EA] shadow-xs'
                   : 'text-[#7B746E] hover:text-[#151311]'

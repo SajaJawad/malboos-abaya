@@ -11,7 +11,7 @@ export const ShopByOccasion: React.FC = () => {
         <SectionHeading
           title="اختاري حسب المناسبة"
           englishLabel="SHOP BY OCCASION"
-          subtitle="تصاميم مصممة خصيصاً لتتناسب مع كافة أوقاتك وسعيد مناسباتك"
+          subtitle="قطع مختارة بعناية لكل لحظة ومناسبة"
         />
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -19,7 +19,7 @@ export const ShopByOccasion: React.FC = () => {
             <Link
               key={item.id}
               href={`/shop?occasion=${encodeURIComponent(item.name)}`}
-              className="group relative h-64 md:h-80 overflow-hidden rounded-[3px] border border-[#E8DDD0] flex flex-col justify-end p-6 transition-all duration-500 hover:shadow-md"
+              className="group relative h-64 md:h-80 overflow-hidden rounded-[3px] border border-[#E8DDD0] flex flex-col justify-end p-6 transition-all duration-500 hover:shadow-md cursor-pointer"
             >
               <Image
                 src={item.image}

@@ -13,7 +13,7 @@ export const BrandStory: React.FC = () => {
             <div className="w-2/3 aspect-[9/16] sm:aspect-[2/3] lg:aspect-[9/16] relative rounded-[4px] overflow-hidden border border-[#E8DDD0] shadow-md">
               <Image
                 src="/images/malboos/abayas/story-main-abaya.jpg"
-                alt="عالم ملبوس - عباية فاخرة"
+                alt="عالم ملبوس"
                 fill
                 sizes="(max-width: 1024px) 70vw, 35vw"
                 className="object-cover object-center"
@@ -43,11 +43,11 @@ export const BrandStory: React.FC = () => {
             </div>
 
             <p className="text-[#151311] text-lg md:text-xl font-light leading-relaxed">
-              في ملبوس نؤمن أن ما ترتدينه ليس مجرد قطعة، بل جزء من حضورك وتفاصيلك اليومية.
+              في ملبوس، نؤمن أن ما ترتدينه ليس مجرد زيّ، بل هو امتدادٌ لحضورك وتفاصيلك العميقة.
             </p>
 
             <p className="text-[#7B746E] text-base font-light leading-relaxed">
-              لذلك نختار تصاميم تجمع بين الأصالة الخليجية، الراحة، والحرفية المعاصرة لنصنع قطعًا تبقى قريبة منك في كل مناسبة. نسعى دائماً إلى إعادة تعريف الفخامة المحتشمة برؤية متجددة تجسد شخصية المرأة العصرية المعتزة بأصالتها.
+              نختار تصاميم تجمع بين أصالة التراث الخليجي والراحة الفائقة، لنصنع قطعاً تعبر عن أناقتك الهادئة في كل لحظة ومناسبة.
             </p>
 
             <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[#E8DDD0]">
@@ -57,18 +57,18 @@ export const BrandStory: React.FC = () => {
               </div>
               <div className="flex flex-col items-center text-center p-2">
                 <Feather className="w-5 h-5 text-[#C4A36B] mb-1" />
-                <span className="text-xs font-medium text-[#151311]">راحة فائقة</span>
+                <span className="text-xs font-medium text-[#151311]">راحة انسيابية</span>
               </div>
               <div className="flex flex-col items-center text-center p-2">
                 <ShieldCheck className="w-5 h-5 text-[#C4A36B] mb-1" />
-                <span className="text-xs font-medium text-[#151311]">حرفية فاخرة</span>
+                <span className="text-xs font-medium text-[#151311]">دقة التفاصيل</span>
               </div>
             </div>
 
             <div className="pt-4">
               <Link
                 href="/about"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-[#151311] text-[#F7F2EA] text-sm font-medium hover:bg-[#C4A36B] hover:text-[#151311] transition-all rounded-[2px] shadow-sm group"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-[#151311] text-[#F7F2EA] text-sm font-medium hover:bg-[#C4A36B] hover:text-[#151311] transition-all rounded-[2px] shadow-sm group cursor-pointer"
               >
                 <span>اكتشفي قصتنا</span>
                 <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />

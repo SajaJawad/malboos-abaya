@@ -11,7 +11,7 @@ export const TrustBar: React.FC = () => {
     {
       icon: Gift,
       title: 'تغليف فاخر',
-      description: 'يليق بكل عناية وإهداء لمن تحبين',
+      description: 'يليق بهديتك ويكمل تفاصيلها',
     },
     {
       icon: ShieldCheck,
@@ -20,8 +20,8 @@ export const TrustBar: React.FC = () => {
     },
     {
       icon: RefreshCw,
-      title: 'إرجاع واستبدال سهل',
-      description: 'خلال 7 أيام وفق سياسة المتجر',
+      title: 'إرجاع واستبدال مرن',
+      description: 'خلال 7 أيام من تاريخ الاستلام',
     },
   ];
 

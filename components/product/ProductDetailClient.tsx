@@ -19,7 +19,8 @@ interface ProductDetailClientProps {
 
 export function ProductDetailClient({ product, relatedProducts }: ProductDetailClientProps) {
   const [selectedImage, setSelectedImage] = useState<string>(product.images[0]);
-  const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0] || '54');
+  const [selectedSize, setSelectedSize] = useState<string>('');
+  const [sizeError, setSizeError] = useState<boolean>(false);
   const [selectedColor, setSelectedColor] = useState<string>(product.colors[0]?.name || '');
   const [quantity, setQuantity] = useState<number>(1);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState<boolean>(false);
@@ -32,6 +33,11 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
   const isFavorite = isInWishlist(product.id);
 
   const handleAddToCart = () => {
+    if (product.sizes.length > 0 && !selectedSize) {
+      setSizeError(true);
+      return;
+    }
+    setSizeError(false);
     addToCart(product, quantity, selectedSize, selectedColor);
   };
 
@@ -175,7 +181,10 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                 {product.sizes.map((size) => (
                   <button
                     key={size}
-                    onClick={() => setSelectedSize(size)}
+                    onClick={() => {
+                      setSelectedSize(size);
+                      setSizeError(false);
+                    }}
                     className={`py-2.5 text-xs md:text-sm font-medium rounded-[2px] border transition-all cursor-pointer ${
                       selectedSize === size
                         ? 'bg-[#151311] text-[#F7F2EA] border-[#151311]'
@@ -186,6 +195,11 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                   </button>
                 ))}
               </div>
+              {sizeError && (
+                <p className="text-xs text-[#C4A36B] font-medium bg-[#151311] px-3 py-1.5 rounded-[2px] text-center border border-[#C4A36B]/30 animate-fadeIn">
+                  اختاري المقاس أولاً
+                </p>
+              )}
             </div>
 
             {/* Quantity and Actions */}

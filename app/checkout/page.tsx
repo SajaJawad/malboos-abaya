@@ -284,6 +284,7 @@ export default function CheckoutPage() {
                   <div className="p-4 bg-[#F7F2EA] rounded-[2px] text-xs text-[#7B746E] space-y-1">
                     <p>✓ بياناتك محمية بتشفير SSL أمان 100%.</p>
                     <p>✓ سيتم إصدار فاتورة رسمية إلكترونية فور تأكيد الدفع.</p>
+                    <p className="text-[11px] text-[#C4A36B] font-medium pt-1">✦ وضع تجريبي للعرض (Demo Checkout Mode)</p>
                   </div>
                 </div>
               )}

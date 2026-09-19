@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Logo } from '@/components/ui/Logo';
 import { MessageCircle, CreditCard, ShieldCheck } from 'lucide-react';
-import { InstagramIcon } from '@/components/ui/Icons';
+import { InstagramIcon, TikTokIcon } from '@/components/ui/Icons';
 
 export const Footer: React.FC = () => {
   return (
@@ -29,10 +29,10 @@ export const Footer: React.FC = () => {
                 href="https://tiktok.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-[#C4A36B]/30 flex items-center justify-center text-[#C4A36B] hover:bg-[#C4A36B] hover:text-[#151311] transition-all font-bold text-xs"
+                className="w-10 h-10 rounded-full border border-[#C4A36B]/30 flex items-center justify-center text-[#C4A36B] hover:bg-[#C4A36B] hover:text-[#151311] transition-all"
                 aria-label="تيك توك"
               >
-                TK
+                <TikTokIcon className="w-4 h-4" />
               </a>
               <a
                 href="https://wa.me/966500000000"

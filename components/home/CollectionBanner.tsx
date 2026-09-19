@@ -24,7 +24,7 @@ export const CollectionBanner: React.FC = () => {
           <div className="lg:col-span-6 p-8 md:p-14 lg:p-20 flex flex-col justify-center space-y-6 bg-[#F7F2EA] border-t lg:border-t-0 lg:border-r border-[#E8DDD0]">
             <div>
               <span className="font-cormorant text-xs tracking-[0.35em] text-[#C4A36B] uppercase font-semibold block mb-2">
-                NEW COLLECTION 2026
+                NEW COLLECTION
               </span>
               <div className="w-8 h-[1.5px] bg-[#C4A36B] mb-4" />
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#151311] leading-tight">
@@ -32,18 +32,14 @@ export const CollectionBanner: React.FC = () => {
               </h2>
             </div>
 
-            <p className="text-[#76604D] text-lg md:text-xl font-light italic">
-              &quot;بإلهام من التراث... بروح عصرية&quot;
+            <p className="text-[#7B746E] text-base md:text-lg font-light leading-relaxed max-w-lg">
+              تصاميم تستلهم روح التراث الخليجي بتفاصيل معاصرة وأناقة هادئة.
             </p>
 
-            <p className="text-[#7B746E] text-base font-light leading-relaxed max-w-lg">
-              نصمم كل قطعة في هذه المجموعة لتتجاوز الزمان، دامجين بين الحرفية الخليجية المتوارثة وأحدث الخطوط العالمية لتمنحك إطلالة تأسر الحواس في كل ظهور.
-            </p>
-
-            <div className="pt-4">
+            <div className="pt-2">
               <Link
                 href="/shop?filter=new"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-[#151311] text-[#F7F2EA] text-sm font-medium hover:bg-[#C4A36B] hover:text-[#151311] transition-all duration-300 rounded-[2px] shadow-sm group"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-[#151311] text-[#F7F2EA] text-sm font-medium hover:bg-[#C4A36B] hover:text-[#151311] transition-all duration-300 rounded-[2px] shadow-sm group cursor-pointer"
               >
                 <span>اكتشفي المجموعة</span>
                 <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />

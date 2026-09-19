@@ -24,11 +24,11 @@ export const SearchOverlay: React.FC = () => {
 
   const popularSearches = [
     'عباية سوداء',
-    'عبايات مطرزة',
-    'مخاوير',
+    'مخاوير مطرزة',
+    'العيد',
+    'رمضان',
     'الجديد',
-    'مناسبات',
-    'عباية بشت',
+    'العبايات',
   ];
 
   if (!isSearchOpen) return null;
@@ -42,7 +42,7 @@ export const SearchOverlay: React.FC = () => {
         </span>
         <button
           onClick={closeSearch}
-          className="p-2 text-[#151311] hover:text-[#C4A36B] transition-colors"
+          className="p-2 text-[#151311] hover:text-[#C4A36B] transition-colors cursor-pointer"
           aria-label="إغلاق البحث"
         >
           <X className="w-8 h-8 stroke-[1.5]" />
@@ -79,7 +79,7 @@ export const SearchOverlay: React.FC = () => {
                   <button
                     key={term}
                     onClick={() => setQuery(term)}
-                    className="px-4 py-2 bg-[#E8DDD0]/50 hover:bg-[#151311] hover:text-[#F7F2EA] text-sm text-[#151311] transition-all rounded-[2px]"
+                    className="px-4 py-2 bg-[#E8DDD0]/50 hover:bg-[#151311] hover:text-[#F7F2EA] text-sm text-[#151311] transition-all rounded-[2px] cursor-pointer"
                   >
                     {term}
                   </button>
