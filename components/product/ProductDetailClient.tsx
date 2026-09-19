@@ -52,11 +52,11 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
       <Container>
         {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-xs text-[#7B746E] mb-8">
-          <Link href="/" className="hover:text-[#151311]">
+          <Link href="/" className="hover:text-[#151311] cursor-pointer">
             الرئيسية
           </Link>
           <span>/</span>
-          <Link href={`/shop?category=${product.category}`} className="hover:text-[#151311]">
+          <Link href={`/shop?category=${product.category}`} className="hover:text-[#151311] cursor-pointer">
             {product.categoryAr}
           </Link>
           <span>/</span>
@@ -91,7 +91,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                   <button
                     key={idx}
                     onClick={() => setSelectedImage(img)}
-                    className={`relative w-20 aspect-[3/4] rounded-[2px] overflow-hidden border bg-[#FAF7F2] transition-all ${
+                    className={`relative w-20 aspect-[3/4] rounded-[2px] overflow-hidden border bg-[#FAF7F2] transition-all cursor-pointer ${
                       selectedImage === img
                         ? 'border-[#151311] ring-1 ring-[#151311]'
                         : 'border-[#E8DDD0] opacity-70 hover:opacity-100'
@@ -143,7 +143,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                     <button
                       key={col.name}
                       onClick={() => setSelectedColor(col.name)}
-                      className={`w-7 h-7 rounded-full border-2 transition-all flex items-center justify-center ${
+                      className={`w-7 h-7 rounded-full border-2 transition-all flex items-center justify-center cursor-pointer ${
                         selectedColor === col.name
                           ? 'border-[#151311] scale-110'
                           : 'border-transparent opacity-80 hover:opacity-100'
@@ -164,7 +164,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                 </label>
                 <button
                   onClick={() => setIsSizeGuideOpen(true)}
-                  className="text-[#C4A36B] hover:underline flex items-center gap-1 font-medium"
+                  className="text-[#C4A36B] hover:underline flex items-center gap-1 font-medium cursor-pointer"
                 >
                   <Ruler className="w-3.5 h-3.5" />
                   <span>دليل المقاسات</span>
@@ -176,7 +176,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`py-2.5 text-xs md:text-sm font-medium rounded-[2px] border transition-all ${
+                    className={`py-2.5 text-xs md:text-sm font-medium rounded-[2px] border transition-all cursor-pointer ${
                       selectedSize === size
                         ? 'bg-[#151311] text-[#F7F2EA] border-[#151311]'
                         : 'bg-white text-[#151311] border-[#E8DDD0] hover:border-[#C4A36B]'
@@ -195,7 +195,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                 <div className="flex items-center border border-[#E8DDD0] rounded-[2px] bg-white px-2">
                   <button
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="p-2 text-[#151311] hover:text-[#C4A36B]"
+                    className="p-2 text-[#151311] hover:text-[#C4A36B] cursor-pointer"
                   >
                     -
                   </button>
@@ -204,7 +204,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                   </span>
                   <button
                     onClick={() => setQuantity((q) => q + 1)}
-                    className="p-2 text-[#151311] hover:text-[#C4A36B]"
+                    className="p-2 text-[#151311] hover:text-[#C4A36B] cursor-pointer"
                   >
                     +
                   </button>
@@ -213,7 +213,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                 {/* Add to Bag CTA */}
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 py-4 bg-[#151311] text-[#F7F2EA] text-sm font-medium flex items-center justify-center gap-2 hover:bg-[#C4A36B] hover:text-[#151311] transition-all rounded-[2px] shadow-sm"
+                  className="flex-1 py-4 bg-[#151311] text-[#F7F2EA] text-sm font-medium flex items-center justify-center gap-2 hover:bg-[#C4A36B] hover:text-[#151311] transition-all rounded-[2px] shadow-sm cursor-pointer"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   <span>إضافة إلى حقيبة التسوق</span>
@@ -222,7 +222,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                 {/* Wishlist Button */}
                 <button
                   onClick={() => toggleWishlist(product)}
-                  className={`w-12 rounded-[2px] border flex items-center justify-center transition-colors ${
+                  className={`w-12 rounded-[2px] border flex items-center justify-center transition-colors cursor-pointer ${
                     isFavorite
                       ? 'bg-[#151311] border-[#151311] text-[#C4A36B]'
                       : 'border-[#E8DDD0] bg-white text-[#151311] hover:border-[#C4A36B]'
@@ -237,7 +237,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
               <div className="flex justify-end">
                 <button
                   onClick={handleShare}
-                  className="text-xs text-[#7B746E] hover:text-[#151311] flex items-center gap-1.5"
+                  className="text-xs text-[#7B746E] hover:text-[#151311] flex items-center gap-1.5 cursor-pointer"
                 >
                   {copied ? <Check className="w-3.5 h-3.5 text-green-600" /> : <Share2 className="w-3.5 h-3.5" />}
                   <span>{copied ? 'تم نسخ الرابط!' : 'مشاركة القطعة'}</span>
@@ -251,7 +251,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
               <div className="py-4">
                 <button
                   onClick={() => toggleAccordion('details')}
-                  className="w-full flex justify-between items-center text-sm font-medium text-[#151311] text-right"
+                  className="w-full flex justify-between items-center text-sm font-medium text-[#151311] text-right cursor-pointer"
                 >
                   <span>تفاصيل المنتج والخامة</span>
                   {openAccordion === 'details' ? <ChevronUp className="w-4 h-4 text-[#C4A36B]" /> : <ChevronDown className="w-4 h-4" />}
@@ -270,7 +270,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
               <div className="py-4">
                 <button
                   onClick={() => toggleAccordion('shipping')}
-                  className="w-full flex justify-between items-center text-sm font-medium text-[#151311] text-right"
+                  className="w-full flex justify-between items-center text-sm font-medium text-[#151311] text-right cursor-pointer"
                 >
                   <span>الشحن والتوصيل</span>
                   {openAccordion === 'shipping' ? <ChevronUp className="w-4 h-4 text-[#C4A36B]" /> : <ChevronDown className="w-4 h-4" />}
@@ -290,7 +290,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
               <div className="py-4">
                 <button
                   onClick={() => toggleAccordion('returns')}
-                  className="w-full flex justify-between items-center text-sm font-medium text-[#151311] text-right"
+                  className="w-full flex justify-between items-center text-sm font-medium text-[#151311] text-right cursor-pointer"
                 >
                   <span>الاستبدال والاسترجاع</span>
                   {openAccordion === 'returns' ? <ChevronUp className="w-4 h-4 text-[#C4A36B]" /> : <ChevronDown className="w-4 h-4" />}
