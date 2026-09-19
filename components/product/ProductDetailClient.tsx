@@ -68,17 +68,17 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
           {/* Left: Gallery (7 cols) */}
           <div className="lg:col-span-7 space-y-4">
             {/* Main Featured Image */}
-            <div className="relative aspect-[3/4] w-full rounded-[4px] overflow-hidden bg-[#E8DDD0]/30 border border-[#E8DDD0] shadow-sm">
+            <div className="relative aspect-[3/4] max-h-[680px] w-full rounded-[4px] overflow-hidden bg-[#FAF7F2] border border-[#E8DDD0] shadow-sm flex items-center justify-center">
               <Image
                 src={selectedImage}
                 alt={product.name}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 55vw"
-                className="object-cover transition-all duration-500"
+                className="object-contain object-center p-2 transition-all duration-500"
               />
               {product.badge && (
-                <div className="absolute top-4 right-4">
+                <div className="absolute top-4 right-4 z-10">
                   <Badge variant="primary">{product.badge}</Badge>
                 </div>
               )}
@@ -91,13 +91,13 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                   <button
                     key={idx}
                     onClick={() => setSelectedImage(img)}
-                    className={`relative w-20 aspect-[3/4] rounded-[2px] overflow-hidden border transition-all ${
+                    className={`relative w-20 aspect-[3/4] rounded-[2px] overflow-hidden border bg-[#FAF7F2] transition-all ${
                       selectedImage === img
                         ? 'border-[#151311] ring-1 ring-[#151311]'
                         : 'border-[#E8DDD0] opacity-70 hover:opacity-100'
                     }`}
                   >
-                    <Image src={img} alt="" fill className="object-cover" />
+                    <Image src={img} alt="" fill className="object-contain object-center p-0.5" />
                   </button>
                 ))}
               </div>

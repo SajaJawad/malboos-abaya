@@ -22,7 +22,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
   const isFavorite = isInWishlist(product.id);
 
   const mainImage = product.images[0] || '/images/malboos/abayas/abaya-1.jpg';
-  const secondaryImage = product.images[1] || mainImage;
 
   return (
     <div
@@ -31,14 +30,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Image Wrapper */}
-      <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#E8DDD0]/30 rounded-[3px] border border-[#E8DDD0]/50">
+      <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#FAF7F2] rounded-[3px] border border-[#E8DDD0]/50 flex items-center justify-center">
         <Link href={`/product/${product.slug}`} className="block w-full h-full">
           <Image
             src={mainImage}
             alt={product.name}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className="object-contain object-center p-1 transition-transform duration-700 group-hover:scale-105"
           />
         </Link>
 
